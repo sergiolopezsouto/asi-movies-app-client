@@ -1,8 +1,7 @@
 <template>
   <div class="home">
-    <h1>events app</h1>
-    <h2>(borrar esta vista y redirijir a los eventos de hoy directamente)</h2>
-    <h2>(o simplemente poner un home basico y pista)</h2>
+    <h2>Welcome to this events app!</h2>
+    <img src="../../public/events.jpeg" alt="events" />
   </div>
 </template>
 
@@ -13,18 +12,13 @@ export default {
 </script>
 
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+h2 {
+  margin-top: 100px;
+  align-content: center;
+  justify-content: center;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+img {
+  height: auto;
+  width: 30%;
 }
 </style>

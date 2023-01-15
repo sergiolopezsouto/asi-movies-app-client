@@ -1,4 +1,5 @@
 <template>
+  <h3>REGISTER</h3>
   <form>
     <div class="mb-3">
       <label for="login" class="form-label"> Username </label>
@@ -6,7 +7,7 @@
         type="text"
         class="form-control"
         id="login"
-        v-model="loginForm.login"
+        v-model="registerForm.login"
       />
     </div>
     <div class="mb-3">
@@ -15,31 +16,31 @@
         type="password"
         class="form-control"
         id="password"
-        v-model="loginForm.password"
+        v-model="registerForm.password"
       />
     </div>
-    <button type="submit" class="btn btn-primary" @click.prevent="login()">
+    <button type="submit" class="btn btn-primary" @click.prevent="register()">
       Submit
     </button>
   </form>
 </template>
 
 <script>
-import auth from "@/common/auth";
+import AccountRepository from "@/repositories/AccountRepository.js";
 
 export default {
   data() {
     return {
-      loginForm: {
+      registerForm: {
         login: null,
         password: null,
       },
     };
   },
   methods: {
-    async login() {
+    async register() {
       try {
-        await auth.login(this.loginForm);
+        await AccountRepository.registerAccount(this.registerForm);
         this.$router.go(-1);
       } catch (err) {
         console.error(err);
@@ -48,3 +49,14 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+form {
+  width: 25rem;
+  margin: 0 auto;
+  margin-top: 75px;
+}
+h3 {
+  margin-top: 75px;
+}
+</style>

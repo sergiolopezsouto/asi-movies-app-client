@@ -22,7 +22,7 @@
           </li>
           <li class="nav-item">
             <router-link class="nav-link" to="/upcoming" active-class="active">
-              Upcoming Events
+              Upcoming
             </router-link>
           </li>
           <li class="nav-item">
@@ -33,36 +33,6 @@
             >
               Categories
             </router-link>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              ref="dropdownElement"
-            >
-              // Posts (quitar)
-            </a>
-            <ul class="dropdown-menu">
-              <li>
-                <router-link
-                  class="dropdown-item"
-                  to="/posts"
-                  active-class="active"
-                  >Como vue 2</router-link
-                >
-              </li>
-              <li>
-                <router-link
-                  class="dropdown-item"
-                  to="/posts-setup"
-                  active-class="active"
-                  >Script setup</router-link
-                >
-              </li>
-            </ul>
           </li>
           <li class="nav-item" v-if="!isLogged">
             <router-link class="nav-link" to="/register" active-class="active">
@@ -88,24 +58,12 @@
               Profile
             </router-link>
           </li>
+          <li class="nav-item" v-if="isLogged && isAdmin">
+            <router-link class="nav-link" to="/users" active-class="active">
+              Users
+            </router-link>
+          </li>
           <li class="nav-item" v-if="isLogged">
-            <a class="nav-link" @click="logout()"> Logout </a>
-          </li>
-          <li class="nav-item" v-if="!isLogged">
-            <router-link
-              class="nav-link"
-              to="/createevent"
-              active-class="active"
-            >
-              Create Event
-            </router-link>
-          </li>
-          <li class="nav-item" v-if="!isLogged">
-            <router-link class="nav-link" to="/profile" active-class="active">
-              Profile
-            </router-link>
-          </li>
-          <li class="nav-item" v-if="!isLogged">
             <a class="nav-link" @click="logout()"> Logout </a>
           </li>
         </ul>
@@ -127,7 +85,11 @@ export default {
   },
   computed: {
     isLogged() {
+      // console.log(this.store.state.user, 'INFO DEL USUARIO')
       return this.store.state.user.logged;
+    },
+    isAdmin() {
+      return this.store.state.user.authority === "ADMIN";
     },
   },
   methods: {
@@ -136,15 +98,6 @@ export default {
       // Después de hacer logout nos vamos a home
       if (this.$router.currentRoute.name != "home") {
         this.$router.push({ name: "home" });
-      }
-    },
-  },
-  watch: {
-    $route(newValue) {
-      if (["PostList", "PostListSetup"].includes(newValue.name)) {
-        this.$refs.dropdownElement.classList.add("active");
-      } else {
-        this.$refs.dropdownElement.classList.remove("active");
       }
     },
   },

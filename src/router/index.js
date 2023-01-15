@@ -12,11 +12,48 @@ import EventListUpcoming from "@/components/EventListUpcoming.vue";
 import EventCategories from "@/components/EventCategories.vue";
 import EventForm from "@/components/EventForm.vue";
 import EventProfile from "@/components/EventProfile.vue";
+import EventUsers from "@/components/EventUsers.vue";
+import EventDetail from "@/components/EventDetail.vue";
 
 import auth from "@/common/auth";
 import { getStore } from "@/common/store";
 
 const routes = [
+  {
+    path: "/",
+    name: "home",
+    component: HomeView,
+    meta: { public: true },
+  },
+  {
+    path: "/today",
+    name: "Today",
+    component: EventListToday,
+    meta: { public: true },
+  },
+  {
+    path: "/upcoming",
+    name: "Upcoming",
+    component: EventListUpcoming,
+    meta: { public: true },
+  },
+  {
+    path: "/event/new",
+    name: "EventCreate",
+    component: EventForm,
+  },
+  {
+    path: "/events/:id",
+    name: "EventDetail",
+    component: EventDetail,
+    meta: { public: true },
+  },
+  {
+    path: "/categories",
+    name: "Categories",
+    component: EventCategories,
+    meta: { public: true },
+  },
   {
     path: "/login",
     name: "Login",
@@ -42,29 +79,12 @@ const routes = [
     meta: { public: true, isLoginPage: false },
   },
   {
-    path: "/",
-    name: "home",
-    component: HomeView,
+    path: "/users",
+    name: "Users",
+    component: EventUsers,
     meta: { public: true },
   },
-  {
-    path: "/today",
-    name: "Today",
-    component: EventListToday,
-    meta: { public: true },
-  },
-  {
-    path: "/upcoming",
-    name: "Upcoming",
-    component: EventListUpcoming,
-    meta: { public: true },
-  },
-  {
-    path: "/categories",
-    name: "Categories",
-    component: EventCategories,
-    meta: { public: true },
-  },
+  // ----------------------------------------------------------------------------------------------
   {
     path: "/posts",
     name: "PostList",
@@ -94,6 +114,7 @@ const routes = [
     component: PostDetail,
     meta: { public: true },
   },
+  // ----------------------------------------------------------------------------------------------
   {
     path: "/:catchAll(.*)*",
     component: ErrorNotFoundView,

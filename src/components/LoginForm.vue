@@ -1,4 +1,5 @@
 <template>
+  <h3>LOGIN</h3>
   <form>
     <div class="mb-3">
       <label for="login" class="form-label"> Username </label>
@@ -48,3 +49,14 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+form {
+  width: 25rem;
+  margin: 0 auto;
+  margin-top: 75px;
+}
+h3 {
+  margin-top: 75px;
+}
+</style>
