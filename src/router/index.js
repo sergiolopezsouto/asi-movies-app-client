@@ -1,10 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
-import PostList from "../components/posts/PostList.vue";
-import PostListSetup from "../components/posts/PostListSetup.vue";
-import PostForm from "../components/posts/PostForm.vue";
 import ErrorNotFoundView from "../views/ErrorNotFoundView.vue";
-import PostDetail from "../components/posts/PostDetail.vue";
 import LoginForm from "@/components/LoginForm.vue";
 import RegisterForm from "@/components/RegisterForm.vue";
 import EventListToday from "@/components/EventListToday.vue";
@@ -84,37 +80,6 @@ const routes = [
     component: EventUsers,
     meta: { public: true },
   },
-  // ----------------------------------------------------------------------------------------------
-  {
-    path: "/posts",
-    name: "PostList",
-    component: PostList,
-    meta: { public: true },
-  },
-  {
-    path: "/posts-setup",
-    name: "PostListSetup",
-    component: PostListSetup,
-    meta: { public: true },
-  },
-  // /posts/new debe colocarse antes de /posts/:id porque si no vue-router
-  // interpreta "new" como si fuera el id.
-  //
-  // Una forma de evitar este problema es usar una expresión regular para
-  // limitar los valores que son interpretados. Por ejemplo, usando el path
-  // /posts/:id(\\d+), vue-router espera que :id sea numérico.
-  {
-    name: "PostCreate",
-    path: "/posts/new",
-    component: PostForm,
-  },
-  {
-    path: "/posts/:id",
-    name: "PostDetail",
-    component: PostDetail,
-    meta: { public: true },
-  },
-  // ----------------------------------------------------------------------------------------------
   {
     path: "/:catchAll(.*)*",
     component: ErrorNotFoundView,
