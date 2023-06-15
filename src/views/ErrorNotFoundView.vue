@@ -28,6 +28,7 @@ export default {
 h1 {
   font-size: 30vh;
 }
+
 h2,
 h3 {
   opacity: 0.6;

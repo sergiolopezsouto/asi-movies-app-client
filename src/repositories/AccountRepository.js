@@ -10,7 +10,6 @@ export default {
   },
 
   async registerAccount(user) {
-    // console.log(user,'EL USUARIO')
     return (await HTTP.post(`register`, user)).data;
   },
 };

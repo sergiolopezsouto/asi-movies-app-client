@@ -5,10 +5,11 @@ import LoginForm from "@/components/LoginForm.vue";
 import RegisterForm from "@/components/RegisterForm.vue";
 import EventListToday from "@/components/EventListToday.vue";
 import EventListUpcoming from "@/components/EventListUpcoming.vue";
-import EventCategories from "@/components/EventCategories.vue";
-import EventForm from "@/components/EventForm.vue";
-import EventProfile from "@/components/EventProfile.vue";
-import EventUsers from "@/components/EventUsers.vue";
+import EventCategories from "@/components/CategoryList.vue";
+import EventForm from "@/components/CreateEventForm.vue";
+import EventProfile from "@/components/ProfilePage.vue";
+import UserPage from "@/components/UserPage.vue";
+import UserList from "@/components/UserList.vue";
 import EventDetail from "@/components/EventDetail.vue";
 
 import auth from "@/common/auth";
@@ -34,15 +35,10 @@ const routes = [
     meta: { public: true },
   },
   {
-    path: "/event/new",
-    name: "EventCreate",
-    component: EventForm,
-  },
-  {
     path: "/events/:id",
     name: "EventDetail",
     component: EventDetail,
-    meta: { public: true },
+    meta: { requiresAuth: true }, // Ruta protegida, requiere autenticación
   },
   {
     path: "/categories",
@@ -66,19 +62,25 @@ const routes = [
     path: "/createevent",
     name: "CreateEvent",
     component: EventForm,
-    meta: { public: true, isLoginPage: false },
+    meta: { requiresAuth: true }, // Ruta protegida, requiere autenticación
   },
   {
     path: "/profile",
     name: "Profile",
     component: EventProfile,
-    meta: { public: true, isLoginPage: false },
+    meta: { requiresAuth: true }, // Ruta protegida, requiere autenticación
   },
   {
     path: "/users",
     name: "Users",
-    component: EventUsers,
-    meta: { public: true },
+    component: UserList,
+    meta: { requiresAuth: true, authority: "ADMIN" }, // Ruta protegida y requiere rol de "admin"
+  },
+  {
+    path: "/users/:id",
+    name: "UserPage",
+    component: UserPage,
+    meta: { requiresAuth: true }, // Ruta protegida y requiere autenticación
   },
   {
     path: "/:catchAll(.*)*",
@@ -126,7 +128,8 @@ router.beforeEach((to, from, next) => {
       // página pública
       if (userIsLogged && to.meta.isLoginPage) {
         // si estamos logueados no hace falta volver a mostrar el login
-        next({ name: "Home", replace: true });
+        next("/");
+        // next({ name: "Home", replace: true });
       } else {
         next();
       }

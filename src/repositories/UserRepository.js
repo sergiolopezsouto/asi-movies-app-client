@@ -1,10 +1,15 @@
 import HTTP from "@/common/http";
 
-const resource = "users";
+// const resource = "users";
 
-export default {
-  async findAll() {
-    const response = await HTTP.get(resource);
-    return response.data;
-  },
-};
+async function findAll() {
+  const response = await HTTP.get("users");
+  return response.data;
+}
+
+async function getUserById(id) {
+  const response = await HTTP.get(`users/${id}`);
+  return response.data;
+}
+
+export default { findAll, getUserById };

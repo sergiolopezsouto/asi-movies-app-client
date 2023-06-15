@@ -17,6 +17,7 @@ h2 {
   align-content: center;
   justify-content: center;
 }
+
 img {
   height: auto;
   width: 30%;

@@ -5,6 +5,7 @@ const store = ref({
     user: {
       authority: "",
       login: "",
+      id: "", // O null, dependiendo de lo que prefieras
       logged: false,
     },
   },

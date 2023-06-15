@@ -1,6 +1,6 @@
 <template>
-  <h3>REGISTER</h3>
-  <form>
+  <h3 class="mt-5">REGISTER</h3>
+  <form style="width: 25rem; margin: 0 auto; margin-top: 75px">
     <div class="mb-3">
       <label for="login" class="form-label"> Username </label>
       <input
@@ -49,14 +49,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss" scoped>
-form {
-  width: 25rem;
-  margin: 0 auto;
-  margin-top: 75px;
-}
-h3 {
-  margin-top: 75px;
-}
-</style>

@@ -16,6 +16,7 @@
 h1 {
   font-size: 30vh;
 }
+
 h2 {
   opacity: 0.6;
 }

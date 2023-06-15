@@ -44,6 +44,11 @@
               Login
             </router-link>
           </li>
+          <li class="nav-item" v-if="isLogged && isAdmin">
+            <router-link class="nav-link" to="/users" active-class="active">
+              Users
+            </router-link>
+          </li>
           <li class="nav-item" v-if="isLogged">
             <router-link
               class="nav-link"
@@ -56,11 +61,6 @@
           <li class="nav-item" v-if="isLogged">
             <router-link class="nav-link" to="/profile" active-class="active">
               Profile
-            </router-link>
-          </li>
-          <li class="nav-item" v-if="isLogged && isAdmin">
-            <router-link class="nav-link" to="/users" active-class="active">
-              Users
             </router-link>
           </li>
           <li class="nav-item" v-if="isLogged">
@@ -85,7 +85,6 @@ export default {
   },
   computed: {
     isLogged() {
-      // console.log(this.store.state.user, 'INFO DEL USUARIO')
       return this.store.state.user.logged;
     },
     isAdmin() {
@@ -96,9 +95,7 @@ export default {
     logout() {
       auth.logout();
       // Después de hacer logout nos vamos a home
-      if (this.$router.currentRoute.name != "home") {
-        this.$router.push({ name: "home" });
-      }
+      this.$router.push({ name: "home" });
     },
   },
 };

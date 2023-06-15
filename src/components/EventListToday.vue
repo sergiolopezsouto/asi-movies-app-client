@@ -1,8 +1,18 @@
 <template>
-  <h3>TODAY EVENTS</h3>
-    <div class="col mb-3 container-events" v-for="event in eventListToday" :key="event.id">
-      <event-card v-if="isToday(event.date)" :event="event" />
+  <div>
+    <div class="search-bar mt-5 mb-5">
+      <input type="text" v-model="searchQuery" placeholder="Search events" />
     </div>
+    <h3>TODAY EVENTS</h3>
+    <div
+      class="col mb-3"
+      style="padding: 0 100px"
+      v-for="event in filteredEvents"
+      :key="event.id"
+    >
+      <event-card :event="event" />
+    </div>
+  </div>
 </template>
 
 <script>
@@ -16,31 +26,26 @@ export default {
   data() {
     return {
       eventListToday: [],
+      searchQuery: "", // Consulta de búsqueda de eventos
     };
   },
   async created() {
     const events = await EventRepository.getEvents();
-    console.log(events, "EVENTOS");
     this.eventListToday = events;
   },
-  methods: {
-    isToday(date) {
-      const someDate = new Date(date);
-      const today = new Date();
-      return someDate.getDate() == today.getDate() &&
-            someDate.getMonth() == today.getMonth() &&
-            someDate.getFullYear() == today.getFullYear()
-    }
+  computed: {
+    filteredEvents() {
+      if (this.searchQuery === "") {
+        // Mostrar todos los eventos si no hay consulta de búsqueda
+        return this.eventListToday;
+      } else {
+        // Filtrar eventos por consulta de búsqueda
+        const searchQueryLower = this.searchQuery.toLowerCase();
+        return this.eventListToday.filter((event) =>
+          event.title.toLowerCase().includes(searchQueryLower)
+        );
+      }
+    },
   },
 };
 </script>
-
-<style lang="scss" scoped>
-h3 {
-  margin-top: 75px;
-}
-
-.container-events {
-  padding: 0 100px;
-}
-</style>

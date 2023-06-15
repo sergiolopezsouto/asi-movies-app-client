@@ -4,16 +4,26 @@ async function getEvents() {
   const response = await HTTP.get("events");
   return response.data;
 }
-/*
+
+async function getEventById(id) {
+  const response = await HTTP.get(`events/${id}`);
+  return response.data;
+}
+
 async function saveEvent(event) {
-  if (post.id) {
-    return applyDate((await HTTP.put(`${resource}/${event.id}`, event)).data);
+  if (event.id) {
+    // Si el evento ya tiene un id, lo actualizamos
+    const response = await HTTP.put(`events/${event.id}`, event);
+    return response.data;
   } else {
-    return applyDate((await HTTP.post(`${resource}`, event)).data);
+    // Si el evento no tiene un id, lo creamos
+    const response = await HTTP.post(`events`, event);
+    return response.data;
   }
 }
-*/
 
 export default {
   getEvents,
+  saveEvent,
+  getEventById,
 };

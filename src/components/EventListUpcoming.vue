@@ -1,12 +1,25 @@
 <template>
-  <h3>UPCOMING EVENTS</h3>
   <div>
-    <div class="col mb-3 container-events" v-for="event in eventList" :key="event.id">
+    <div class="search-bar mt-5 mb-5">
+      <input type="text" v-model="searchQuery" placeholder="Search events" />
+    </div>
+    <h3>UPCOMING EVENTS</h3>
+    <div
+      class="col mb-3 container-events"
+      style="padding: 0 100px"
+      v-for="event in filteredEvents"
+      :key="event.id"
+    >
       <event-card v-if="isInTheFuture(event.date)" :event="event" />
     </div>
   </div>
-  <h3>NO DATE EVENTS</h3>
-  <div class="col mb-3 container-events" v-for="event in eventList" :key="event.id">
+  <h3 class="mt-5">NO DATE EVENTS</h3>
+  <div
+    class="col mb-3 container-events"
+    style="padding: 0 100px"
+    v-for="event in eventList"
+    :key="event.id"
+  >
     <event-card v-if="event.date === null" :event="event" />
   </div>
 </template>
@@ -22,6 +35,7 @@ export default {
   data() {
     return {
       eventList: [],
+      searchQuery: "", // Consulta de búsqueda de eventos
     };
   },
   methods: {
@@ -35,15 +49,19 @@ export default {
     const events = await EventRepository.getEvents();
     this.eventList = events;
   },
+  computed: {
+    filteredEvents() {
+      if (this.searchQuery === "") {
+        // Mostrar todos los eventos si no hay consulta de búsqueda
+        return this.eventList.filter((event) => this.isInTheFuture(event.date));
+      } else {
+        // Filtrar eventos por consulta de búsqueda
+        const searchQueryLower = this.searchQuery.toLowerCase();
+        return this.eventList.filter((event) =>
+          event.title.toLowerCase().includes(searchQueryLower)
+        );
+      }
+    },
+  },
 };
 </script>
-
-<style lang="scss" scoped>
-h3 {
-  margin-top: 75px;
-}
-
-.container-events {
-  padding: 0 100px;
-}
-</style>
