@@ -2,10 +2,15 @@
   <div class="info mt-5">
     <h2>{{ event.title }}</h2>
     <hr />
-    <img src="{{ event.image }}" alt="event-img" style="width: 25%" />
-    <p><strong>CATEGORY: </strong>{{ event.category.name }}</p>
+    <img :src="event.image" alt="event-img" style="width: 25%" />
     <p>
-      <strong> CREATOR: </strong>
+      <strong>CATEGORY: </strong>
+      <router-link :to="`/eventsbycategory/${event.category.name}`">
+        {{ event.category.name }}
+      </router-link>
+    </p>
+    <p>
+      <strong>CREATOR: </strong>
       <router-link :to="`/users/${event.author.id}`">
         {{ event.author.login }}
       </router-link>
@@ -38,7 +43,7 @@ export default {
   async created() {
     const eventId = this.$route.params.id;
     this.event = await EventRepository.getEventById(eventId);
-    this.user = getStore().state.user; // get user data
+    this.user = getStore().state.user; // Obtener datos del usuario
   },
   computed: {
     userIsOwnerOrAdmin() {

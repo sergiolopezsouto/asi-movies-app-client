@@ -2,10 +2,18 @@
   <div>
     <h3 class="mb-3 mt-5">CATEGORIES</h3>
     <hr />
-    <div v-for="category in categoryList" :key="category.id">
-      <p style="display: inline-block; margin-right: 10px">
+    <div class="my-4">
+      <button v-if="isAdmin" class="btn btn-primary">ADD NEW CATEGORY</button>
+    </div>
+    <hr />
+    <div class="mb-3" v-for="category in categoryList" :key="category.id">
+      <router-link
+        :to="`/eventsbycategory/${category.name}`"
+        style="display: inline-block; margin-right: 10px"
+      >
         {{ category.name }}
-      </p>
+      </router-link>
+
       <button
         v-if="isAdmin"
         class="btn btn-dark"

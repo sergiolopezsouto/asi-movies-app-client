@@ -34,6 +34,15 @@
               Categories
             </router-link>
           </li>
+          <li class="nav-item">
+            <router-link
+              class="nav-link"
+              to="/searchusers"
+              active-class="active"
+            >
+              Search Users
+            </router-link>
+          </li>
           <li class="nav-item" v-if="!isLogged">
             <router-link class="nav-link" to="/register" active-class="active">
               Register

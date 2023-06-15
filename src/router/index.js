@@ -11,6 +11,8 @@ import EventProfile from "@/components/ProfilePage.vue";
 import UserPage from "@/components/UserPage.vue";
 import UserList from "@/components/UserList.vue";
 import EventDetail from "@/components/EventDetail.vue";
+import EventListByCategory from "@/components/EventListByCategory.vue";
+import SearchUsers from "@/components/SearchUsers.vue";
 
 import auth from "@/common/auth";
 import { getStore } from "@/common/store";
@@ -32,6 +34,12 @@ const routes = [
     path: "/upcoming",
     name: "Upcoming",
     component: EventListUpcoming,
+    meta: { public: true },
+  },
+  {
+    path: "/eventsbycategory/:category",
+    name: "EventsByCategory",
+    component: EventListByCategory,
     meta: { public: true },
   },
   {
@@ -80,6 +88,12 @@ const routes = [
     path: "/users/:id",
     name: "UserPage",
     component: UserPage,
+    meta: { requiresAuth: true }, // Ruta protegida y requiere autenticación
+  },
+  {
+    path: "/searchusers",
+    name: "SearchUsers",
+    component: SearchUsers,
     meta: { requiresAuth: true }, // Ruta protegida y requiere autenticación
   },
   {
