@@ -14,9 +14,9 @@
       <button class="btn btn-primary" @click="createCategory">
         ADD NEW CATEGORY
       </button>
+      <hr />
     </div>
 
-    <hr />
     <div class="mb-3" v-for="category in categoryList" :key="category.id">
       <router-link
         :to="`/eventsbycategory/${category.name}`"
