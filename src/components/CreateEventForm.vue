@@ -27,6 +27,8 @@ export default {
     },
     async createEvent() {
       try {
+        // Añadir la hora a la fecha antes de enviarla
+        this.event.date += "T00:00:00";
         await EventRepository.saveEvent(this.event);
         this.$router.push("/today");
       } catch (err) {

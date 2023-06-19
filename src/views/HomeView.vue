@@ -20,6 +20,6 @@ h2 {
 
 img {
   height: auto;
-  width: 30%;
+  width: 500px;
 }
 </style>

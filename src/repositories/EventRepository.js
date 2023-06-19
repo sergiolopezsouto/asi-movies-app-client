@@ -22,8 +22,14 @@ async function saveEvent(event) {
   }
 }
 
+async function deleteEvent(id) {
+  const response = await HTTP.delete(`events/${id}`);
+  return response.data;
+}
+
 export default {
   getEvents,
   saveEvent,
   getEventById,
+  deleteEvent,
 };
