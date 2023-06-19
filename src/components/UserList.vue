@@ -8,18 +8,27 @@
     >
       {{ user.login }}
     </router-link>
-    {{ user.active ? "(ACTIVE)" : "(NOT ACTIVE) " }}
+    <span v-if="user.active">(ACTIVE)</span>
+    <span v-else>(NOT ACTIVE)</span>
     <button
       v-if="user.active"
       class="btn btn-warning"
       style="margin-right: 10px"
+      @click="deactivateUser(user.id)"
     >
       DESACTIVATE
     </button>
-    <button v-else class="btn btn-primary" style="margin-right: 10px">
+    <button
+      v-else
+      class="btn btn-primary"
+      style="margin-right: 10px"
+      @click="activateUser(user.id)"
+    >
       ACTIVATE
     </button>
-    <button class="btn btn-danger">REMOVE USER</button>
+    <button class="btn btn-danger" @click="deleteUser(user.id)">
+      REMOVE USER
+    </button>
   </div>
 </template>
 
@@ -35,6 +44,41 @@ export default {
   async created() {
     const users = await UserRepository.findAll();
     this.userList = users;
+  },
+  methods: {
+    async activateUser(userId) {
+      try {
+        await UserRepository.activateUser(userId);
+        const updatedUser = this.userList.find((user) => user.id === userId);
+        if (updatedUser) {
+          updatedUser.active = true;
+        }
+      } catch (error) {
+        console.error("An error occurred:", error);
+      }
+    },
+    async deactivateUser(userId) {
+      try {
+        await UserRepository.deactivateUser(userId);
+        const updatedUser = this.userList.find((user) => user.id === userId);
+        if (updatedUser) {
+          updatedUser.active = false;
+        }
+      } catch (error) {
+        console.error("An error occurred:", error);
+      }
+    },
+    async deleteUser(userId) {
+      const confirmation = confirm("Do you want to delete this user?");
+      if (confirmation) {
+        try {
+          await UserRepository.deleteUser(userId);
+          this.userList = this.userList.filter((user) => user.id !== userId);
+        } catch (error) {
+          console.error("An error occurred:", error);
+        }
+      }
+    },
   },
 };
 </script>
