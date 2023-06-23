@@ -2,8 +2,6 @@
   <div>
     <h3 class="mb-3 mt-5">CATEGORIES</h3>
     <hr />
-
-    <!-- Add Category Form -->
     <div v-if="isAdmin" class="my-4">
       <input
         v-model="newCategory.name"

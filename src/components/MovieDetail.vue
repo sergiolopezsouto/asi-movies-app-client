@@ -34,13 +34,31 @@
           <strong>RELEASE DATE: </strong
           >{{ new Date(movie.releaseDate).toDateString() }}
         </p>
-        <p>
+        <!-- <p>
           <strong>CATEGORY: </strong>
           <router-link :to="`/moviesbycategory/${movie.category?.name}`">
             {{ movie.category?.name }}
           </router-link>
+        </p> -->
+        <p>
+          <strong>CATEGORY: </strong>
+          <span v-if="movie.category">
+            <router-link :to="`/moviesbycategory/${movie.category?.name}`">
+              {{ movie.category.name }}
+            </router-link>
+          </span>
+          <span v-else> No category specified </span>
         </p>
-        <p><strong>DIRECTOR: </strong>{{ movie.director }}</p>
+        <p>
+          <strong>DIRECTOR: </strong>
+          <span v-if="movie.director">
+            <router-link :to="`/director/${movie.director.id}`">
+              {{ movie.director?.name }}
+            </router-link>
+          </span>
+          <span v-else> No director specified </span>
+        </p>
+        <!-- <p><strong>DIRECTOR: </strong>{{ movie.director }}</p> -->
         <!-- <p><strong>CAST: </strong>{{ movie.director }}</p> -->
       </div>
       <div>

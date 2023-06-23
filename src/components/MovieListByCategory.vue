@@ -1,5 +1,5 @@
 <template>
-  <h3 class="my-5">EVENTS IN CATEGORY: {{ categoryName.toUpperCase() }}</h3>
+  <h3 class="my-5">MOVIES IN CATEGORY: {{ categoryName.toUpperCase() }}</h3>
   <div class="search-bar mt-5 mb-5">
     <input
       class="me-3"
@@ -33,8 +33,8 @@ export default {
   data() {
     return {
       movieList: [],
-      searchQuery: "", // Movie search query
       categoryName: "",
+      searchQuery: "", // Movie search query
     };
   },
   async created() {
@@ -43,7 +43,7 @@ export default {
     const movies = await MovieRepository.getMovies();
     this.movieList = movies.filter(
       (movie) =>
-        movie.category.name.toLowerCase() === this.categoryName.toLowerCase()
+        movie.category?.name.toLowerCase() === this.categoryName.toLowerCase()
     );
   },
   computed: {
@@ -60,18 +60,5 @@ export default {
       }
     },
   },
-  //   watch: {
-  //     "$route.params.category": {
-  //       immediate: true,
-  //       async handler(newVal) {
-  //         this.categoryName = newVal;
-
-  //         const movies = await MovieRepository.getMovies();
-  //         this.movieList = movies.filter(
-  //           (movie) => movie.category.name.toLowerCase() === newVal.toLowerCase()
-  //         );
-  //       },
-  //     },
-  //   },
 };
 </script>

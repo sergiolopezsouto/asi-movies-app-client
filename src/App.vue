@@ -44,12 +44,22 @@
             </router-link>
           </li> -->
           <li class="nav-item" v-if="isLogged">
+            <router-link class="nav-link" to="/directors" active-class="active">
+              Directors
+            </router-link>
+          </li>
+          <li class="nav-item" v-if="isLogged && isAdmin">
             <router-link
               class="nav-link"
-              to="/searchusers"
+              to="/createmovie"
               active-class="active"
             >
-              Search Users
+              Create movie
+            </router-link>
+          </li>
+          <li class="nav-item" v-if="isLogged && isAdmin">
+            <router-link class="nav-link" to="/users" active-class="active">
+              Users
             </router-link>
           </li>
           <li class="nav-item" v-if="!isLogged">
@@ -60,20 +70,6 @@
           <li class="nav-item" v-if="!isLogged">
             <router-link class="nav-link" to="/login" active-class="active">
               Login
-            </router-link>
-          </li>
-          <li class="nav-item" v-if="isLogged && isAdmin">
-            <router-link class="nav-link" to="/users" active-class="active">
-              Users
-            </router-link>
-          </li>
-          <li class="nav-item" v-if="isLogged && isAdmin">
-            <router-link
-              class="nav-link"
-              to="/createmovie"
-              active-class="active"
-            >
-              Create movie
             </router-link>
           </li>
           <li class="nav-item" v-if="isLogged">

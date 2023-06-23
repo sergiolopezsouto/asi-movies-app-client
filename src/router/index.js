@@ -4,13 +4,16 @@ import ErrorNotFoundView from "../views/ErrorNotFoundView.vue";
 import ErrorForbiddenView from "../views/ErrorForbiddenView.vue";
 import LoginForm from "@/components/LoginForm.vue";
 import RegisterForm from "@/components/RegisterForm.vue";
-import EventCategories from "@/components/CategoryList.vue";
+import CategoryList from "@/components/CategoryList.vue";
+import DirectorList from "@/components/DirectorList.vue";
 import MovieForm from "@/components/CreateMovieForm.vue";
 import EventProfile from "@/components/ProfilePage.vue";
-import UserPage from "@/components/UserPage.vue";
+import DirectorDetail from "@/components/DirectorDetail.vue";
 import UserList from "@/components/UserList.vue";
+import UserPage from "@/components/UserPage.vue";
 import MovieDetail from "@/components/MovieDetail.vue";
 import MovieListByCategory from "@/components/MovieListByCategory.vue";
+import MovieListByDirector from "@/components/MovieListByDirector.vue";
 import MovieList from "@/components/MovieList.vue";
 import SearchUsers from "@/components/SearchUsers.vue";
 
@@ -48,6 +51,12 @@ const routes = [
     component: MovieListByCategory,
     meta: { public: true },
   },
+  {
+    path: "/moviesbydirector/:director",
+    name: "MoviesByDirector",
+    component: MovieListByDirector,
+    meta: { public: true },
+  },
   // {
   //   path: "/eventsbycategory/:category",
   //   name: "EventsByCategory",
@@ -69,7 +78,19 @@ const routes = [
   {
     path: "/categories",
     name: "Categories",
-    component: EventCategories,
+    component: CategoryList,
+    meta: { public: true },
+  },
+  {
+    path: "/directors",
+    name: "Directors",
+    component: DirectorList,
+    meta: { public: true },
+  },
+  {
+    path: "/director/:id",
+    name: "DirectorDetail",
+    component: DirectorDetail,
     meta: { public: true },
   },
   {
@@ -112,7 +133,8 @@ const routes = [
     path: "/users/:id",
     name: "UserPage",
     component: UserPage,
-    meta: { requiresAuth: true }, // Ruta protegida y requiere autenticación
+
+    meta: { requiresAuth: true, authority: "ADMIN" }, // Ruta protegida y requiere rol de "admin"
   },
   {
     path: "/searchusers",

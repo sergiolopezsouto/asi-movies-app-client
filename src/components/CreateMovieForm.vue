@@ -1,18 +1,20 @@
 <script>
 import MovieRepository from "@/repositories/MovieRepository";
 import CategoryRepository from "@/repositories/CategoryRepository.js";
+import DirectorRepository from "@/repositories/DirectorRepository.js";
 
 export default {
   data() {
     return {
       categories: [],
+      directors: [],
       movie: {
         title: "",
         imagePath: "",
         duration: null,
         synopsis: "",
         trailerUrl: "",
-        director: "",
+        director: {},
         releaseDate: "",
         category: {},
       },
@@ -26,6 +28,7 @@ export default {
   methods: {
     async fetchData() {
       this.categories = await CategoryRepository.getCategories();
+      this.directors = await DirectorRepository.getDirectors();
     },
     async createMovie() {
       try {
@@ -96,12 +99,16 @@ export default {
 
       <div class="mb-3">
         <label for="director" class="form-label">Director</label>
-        <input
-          type="text"
-          class="form-control"
-          id="director"
-          v-model="movie.director"
-        />
+        <select class="form-select" id="director" v-model="movie.director">
+          <option selected>Pick a Director</option>
+          <option
+            v-for="director in directors"
+            :key="director.id"
+            :value="director"
+          >
+            {{ director.name }}
+          </option>
+        </select>
       </div>
 
       <div class="mb-3">
@@ -115,8 +122,8 @@ export default {
       </div>
 
       <div class="mb-3">
-        <label for="select" class="form-label">Category</label>
-        <select class="form-select" id="select" v-model="movie.category">
+        <label for="category" class="form-label">Category</label>
+        <select class="form-select" id="category" v-model="movie.category">
           <option selected>Pick a Category</option>
           <option
             v-for="category in categories"
