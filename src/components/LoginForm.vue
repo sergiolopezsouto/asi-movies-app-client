@@ -41,7 +41,7 @@ export default {
     async login() {
       try {
         await auth.login(this.loginForm);
-        this.$router.push({ name: "Today" }); // Redirect to Today Events page
+        this.$router.push({ name: "Movies" });
       } catch (err) {
         console.error(err);
       }

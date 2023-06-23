@@ -41,7 +41,7 @@
           </router-link>
         </p>
         <p><strong>DIRECTOR: </strong>{{ movie.director }}</p>
-        <p><strong>CAST: </strong>{{ movie.director }}</p>
+        <!-- <p><strong>CAST: </strong>{{ movie.director }}</p> -->
       </div>
       <div>
         <hr />

@@ -19,7 +19,7 @@
       </option>
     </select>
   </div>
-  <div class="container">
+  <div class="container my-5">
     <div class="row justify-content-center">
       <div
         class="col-md-6 col-lg-3 mb-3"
@@ -44,9 +44,9 @@ export default {
   data() {
     return {
       movieListToday: [],
-      searchQuery: "", // Consulta de búsqueda de movieos
-      categories: [], // Categorías disponibles
-      selectedCategory: "", // Categoría seleccionada
+      searchQuery: "",
+      categories: [],
+      selectedCategory: "",
     };
   },
   async created() {
@@ -72,12 +72,6 @@ export default {
           (movie) => movie.category.id === this.selectedCategory
         );
       }
-
-      // Filtrar movies para mostrar solo los de hoy
-      // const today = new Date().setHours(0, 0, 0, 0);
-      // filteredMovies = filteredMovies.filter(
-      //   (movie) => new Date(movie.date).setHours(0, 0, 0, 0) === today
-      // );
 
       return filteredMovies;
     },
