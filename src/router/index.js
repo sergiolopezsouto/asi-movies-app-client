@@ -1,17 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import ErrorNotFoundView from "../views/ErrorNotFoundView.vue";
+import ErrorForbiddenView from "../views/ErrorForbiddenView.vue";
 import LoginForm from "@/components/LoginForm.vue";
 import RegisterForm from "@/components/RegisterForm.vue";
-import EventListToday from "@/components/EventListToday.vue";
-import EventListUpcoming from "@/components/EventListUpcoming.vue";
 import EventCategories from "@/components/CategoryList.vue";
-import EventForm from "@/components/CreateEventForm.vue";
+import MovieForm from "@/components/CreateMovieForm.vue";
 import EventProfile from "@/components/ProfilePage.vue";
 import UserPage from "@/components/UserPage.vue";
 import UserList from "@/components/UserList.vue";
-import EventDetail from "@/components/EventDetail.vue";
-import EventListByCategory from "@/components/EventListByCategory.vue";
+import MovieDetail from "@/components/MovieDetail.vue";
+import MovieListByCategory from "@/components/MovieListByCategory.vue";
+import MovieList from "@/components/MovieList.vue";
 import SearchUsers from "@/components/SearchUsers.vue";
 
 import auth from "@/common/auth";
@@ -25,29 +25,47 @@ const routes = [
     meta: { public: true },
   },
   {
-    path: "/today",
-    name: "Today",
-    component: EventListToday,
+    path: "/movies",
+    name: "Movies",
+    component: MovieList,
     meta: { public: true },
   },
+  // {
+  //   path: "/today",
+  //   name: "Today",
+  //   component: EventListToday,
+  //   meta: { public: true },
+  // },
+  // {
+  //   path: "/upcoming",
+  //   name: "Upcoming",
+  //   component: EventListUpcoming,
+  //   meta: { public: true },
+  // },
   {
-    path: "/upcoming",
-    name: "Upcoming",
-    component: EventListUpcoming,
+    path: "/moviesbycategory/:category",
+    name: "MoviesByCategory",
+    component: MovieListByCategory,
     meta: { public: true },
   },
+  // {
+  //   path: "/eventsbycategory/:category",
+  //   name: "EventsByCategory",
+  //   component: EventListByCategory,
+  //   meta: { public: true },
+  // },
   {
-    path: "/eventsbycategory/:category",
-    name: "EventsByCategory",
-    component: EventListByCategory,
-    meta: { public: true },
-  },
-  {
-    path: "/events/:id",
-    name: "EventDetail",
-    component: EventDetail,
+    path: "/movies/:id",
+    name: "MovieDetail",
+    component: MovieDetail,
     meta: { requiresAuth: true }, // Ruta protegida, requiere autenticación
   },
+  // {
+  //   path: "/events/:id",
+  //   name: "EventDetail",
+  //   component: EventDetail,
+  //   meta: { requiresAuth: true }, // Ruta protegida, requiere autenticación
+  // },
   {
     path: "/categories",
     name: "Categories",
@@ -66,11 +84,17 @@ const routes = [
     component: RegisterForm,
     meta: { public: true, isLoginPage: true },
   },
+  // {
+  //   path: "/createevent",
+  //   name: "CreateEvent",
+  //   component: EventForm,
+  //   meta: { requiresAuth: true }, // Ruta protegida, requiere autenticación
+  // },
   {
-    path: "/createevent",
-    name: "CreateEvent",
-    component: EventForm,
-    meta: { requiresAuth: true }, // Ruta protegida, requiere autenticación
+    path: "/createmovie",
+    name: "CreateMovie",
+    component: MovieForm,
+    meta: { requiresAuth: true, authority: "ADMIN" }, // Ruta protegida y requiere rol de "admin"
   },
   {
     path: "/profile",
@@ -94,6 +118,12 @@ const routes = [
     path: "/searchusers",
     name: "SearchUsers",
     component: SearchUsers,
+    meta: { requiresAuth: true }, // Ruta protegida y requiere autenticación
+  },
+  {
+    path: "/accessdenied",
+    name: "ForbiddenPage",
+    component: ErrorForbiddenView,
     meta: { requiresAuth: true }, // Ruta protegida y requiere autenticación
   },
   {
@@ -124,11 +154,9 @@ router.beforeEach((to, from, next) => {
       if (userIsLogged) {
         if (requiredAuthority && requiredAuthority != loggedUserAuthority) {
           // usuario logueado pero sin permisos suficientes, le redirigimos a la página de login
-          alert(
-            "Acceso prohibido para el usuario actual; intenta autenticarte de nuevo"
-          );
-          auth.logout();
-          next("/login");
+          // auth.logout();
+          alert("No tienes acceso a esta página");
+          next("/");
         } else {
           // usuario logueado y con permisos adecuados
           next();

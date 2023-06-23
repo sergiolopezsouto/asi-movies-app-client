@@ -19,7 +19,7 @@
 
     <div class="mb-3" v-for="category in categoryList" :key="category.id">
       <router-link
-        :to="`/eventsbycategory/${category.name}`"
+        :to="`/moviesbycategory/${category.name}`"
         style="display: inline-block; margin-right: 10px"
       >
         {{ category.name }}

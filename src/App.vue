@@ -16,15 +16,15 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <router-link class="nav-link" to="/today" active-class="active">
-              Today
+            <router-link class="nav-link" to="/movies" active-class="active">
+              Movies
             </router-link>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <router-link class="nav-link" to="/upcoming" active-class="active">
               Upcoming
             </router-link>
-          </li>
+          </li> -->
           <li class="nav-item">
             <router-link
               class="nav-link"
@@ -67,13 +67,13 @@
               Users
             </router-link>
           </li>
-          <li class="nav-item" v-if="isLogged">
+          <li class="nav-item" v-if="isLogged && isAdmin">
             <router-link
               class="nav-link"
-              to="/createevent"
+              to="/createmovie"
               active-class="active"
             >
-              Create Event
+              Create movie
             </router-link>
           </li>
           <li class="nav-item" v-if="isLogged">

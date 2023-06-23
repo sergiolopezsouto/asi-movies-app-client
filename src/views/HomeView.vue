@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h2>Welcome to this events app!</h2>
+    <h2>Welcome to this movies app!</h2>
     <img src="../../public/events.jpeg" alt="events" />
   </div>
 </template>
