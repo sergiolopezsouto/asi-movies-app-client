@@ -29,17 +29,14 @@
         <p>{{ movie.synopsis }}</p>
       </div>
       <div class="col-md-4">
-        <p><strong>DURATION: </strong>{{ movie.duration }} min</p>
         <p>
-          <strong>RELEASE DATE: </strong
-          >{{ new Date(movie.releaseDate).toDateString() }}
+          <strong>DURATION: </strong>
+          <span v-if="movie.duration">{{ movie.duration }} min</span>
+          <span v-else>Not available</span>
         </p>
-        <!-- <p>
-          <strong>CATEGORY: </strong>
-          <router-link :to="`/moviesbycategory/${movie.category?.name}`">
-            {{ movie.category?.name }}
-          </router-link>
-        </p> -->
+        <p>
+          <strong>RELEASE DATE: </strong>{{ formatDate(movie.releaseDate) }}
+        </p>
         <p>
           <strong>CATEGORY: </strong>
           <span v-if="movie.category">
@@ -58,8 +55,6 @@
           </span>
           <span v-else> No director specified </span>
         </p>
-        <!-- <p><strong>DIRECTOR: </strong>{{ movie.director }}</p> -->
-        <!-- <p><strong>CAST: </strong>{{ movie.director }}</p> -->
       </div>
       <div>
         <hr />
@@ -231,6 +226,13 @@ export default {
       } catch (error) {
         console.error("An error occurred:", error);
       }
+    },
+    formatDate(dateString) {
+      if (!dateString) {
+        return "Not available";
+      }
+      const date = new Date(dateString);
+      return date.toDateString();
     },
   },
 };

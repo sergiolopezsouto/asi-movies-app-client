@@ -29,6 +29,7 @@
         <movie-card :movie="movie" />
       </div>
     </div>
+    <h1 v-if="filteredMovies.length === 0">No hay resultados coincidentes</h1>
   </div>
 </template>
 
@@ -69,7 +70,7 @@ export default {
       if (this.selectedCategory) {
         // Filtrar movies por categoría seleccionada
         filteredMovies = filteredMovies.filter(
-          (movie) => movie.category.id === this.selectedCategory
+          (movie) => movie.category?.id === this.selectedCategory
         );
       }
 

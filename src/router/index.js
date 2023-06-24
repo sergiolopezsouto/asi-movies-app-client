@@ -15,7 +15,7 @@ import MovieDetail from "@/components/MovieDetail.vue";
 import MovieListByCategory from "@/components/MovieListByCategory.vue";
 import MovieListByDirector from "@/components/MovieListByDirector.vue";
 import MovieList from "@/components/MovieList.vue";
-import SearchUsers from "@/components/SearchUsers.vue";
+// import SearchUsers from "@/components/SearchUsers.vue";
 
 import auth from "@/common/auth";
 import { getStore } from "@/common/store";
@@ -33,18 +33,6 @@ const routes = [
     component: MovieList,
     meta: { public: true },
   },
-  // {
-  //   path: "/today",
-  //   name: "Today",
-  //   component: EventListToday,
-  //   meta: { public: true },
-  // },
-  // {
-  //   path: "/upcoming",
-  //   name: "Upcoming",
-  //   component: EventListUpcoming,
-  //   meta: { public: true },
-  // },
   {
     path: "/moviesbycategory/:category",
     name: "MoviesByCategory",
@@ -57,24 +45,12 @@ const routes = [
     component: MovieListByDirector,
     meta: { public: true },
   },
-  // {
-  //   path: "/eventsbycategory/:category",
-  //   name: "EventsByCategory",
-  //   component: EventListByCategory,
-  //   meta: { public: true },
-  // },
   {
     path: "/movies/:id",
     name: "MovieDetail",
     component: MovieDetail,
     meta: { requiresAuth: true }, // Ruta protegida, requiere autenticación
   },
-  // {
-  //   path: "/events/:id",
-  //   name: "EventDetail",
-  //   component: EventDetail,
-  //   meta: { requiresAuth: true }, // Ruta protegida, requiere autenticación
-  // },
   {
     path: "/categories",
     name: "Categories",
@@ -85,7 +61,7 @@ const routes = [
     path: "/directors",
     name: "Directors",
     component: DirectorList,
-    meta: { public: true },
+    meta: { requiresAuth: true }, // Ruta protegida, requiere autenticación
   },
   {
     path: "/director/:id",
@@ -105,12 +81,6 @@ const routes = [
     component: RegisterForm,
     meta: { public: true, isLoginPage: true },
   },
-  // {
-  //   path: "/createevent",
-  //   name: "CreateEvent",
-  //   component: EventForm,
-  //   meta: { requiresAuth: true }, // Ruta protegida, requiere autenticación
-  // },
   {
     path: "/createmovie",
     name: "CreateMovie",
@@ -136,12 +106,12 @@ const routes = [
 
     meta: { requiresAuth: true, authority: "ADMIN" }, // Ruta protegida y requiere rol de "admin"
   },
-  {
-    path: "/searchusers",
-    name: "SearchUsers",
-    component: SearchUsers,
-    meta: { requiresAuth: true }, // Ruta protegida y requiere autenticación
-  },
+  // {
+  //   path: "/searchusers",
+  //   name: "SearchUsers",
+  //   component: SearchUsers,
+  //   meta: { requiresAuth: true }, // Ruta protegida y requiere autenticación
+  // },
   {
     path: "/accessdenied",
     name: "ForbiddenPage",

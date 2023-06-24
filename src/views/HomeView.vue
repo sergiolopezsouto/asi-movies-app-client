@@ -1,7 +1,6 @@
 <template>
   <div class="home">
-    <h2>Welcome to this movies app!</h2>
-    <img src="../../public/events.jpeg" alt="events" />
+    <h2>WELCOME TO THIS MOVIES APP!</h2>
   </div>
 </template>
 
@@ -12,14 +11,17 @@ export default {
 </script>
 
 <style scoped>
-h2 {
-  margin-top: 100px;
-  align-content: center;
+.home {
+  background-image: url("../assets/cinema.jpeg");
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
   justify-content: center;
 }
 
-img {
-  height: auto;
-  width: 500px;
+h2 {
+  margin-top: 125px;
+  text-align: center;
 }
 </style>

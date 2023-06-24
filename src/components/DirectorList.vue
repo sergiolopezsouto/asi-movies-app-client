@@ -2,6 +2,15 @@
   <div>
     <h3 class="mb-3 mt-5">DIRECTORS</h3>
     <hr />
+    <div class="search-bar mt-3 mb-3">
+      <input
+        class="me-3"
+        type="text"
+        v-model="searchQuery"
+        placeholder="Search by name"
+      />
+    </div>
+    <hr />
     <div v-if="isAdmin" class="my-4">
       <input
         v-model="newDirector.name"
@@ -28,29 +37,35 @@
     </div>
 
     <div class="mb-3" v-for="director in filteredDirectors" :key="director.id">
-      <router-link
-        :to="`/director/${director.id}`"
-        style="display: inline-block; margin-right: 10px"
-      >
-        {{ director.name }}
-      </router-link>
+      <div class="container">
+        <div class="row">
+          <div :class="{ 'col-md-4': isAdmin, 'col-md-12': !isAdmin }">
+            <router-link :to="`/director/${director.id}`">
+              {{ director.name }}
+            </router-link>
+          </div>
 
-      <button
-        v-if="isAdmin"
-        class="btn btn-dark"
-        style="margin-right: 5px"
-        @click="editDirector(director)"
-      >
-        Edit
-      </button>
-      <button
-        v-if="isAdmin"
-        class="btn btn-danger"
-        style="margin-right: 5px"
-        @click="confirmDelete(director.id)"
-      >
-        Delete
-      </button>
+          <div class="col-md-4">
+            <button
+              v-if="isAdmin"
+              class="btn btn-dark"
+              @click="editDirector(director)"
+            >
+              Edit
+            </button>
+          </div>
+
+          <div class="col-md-4">
+            <button
+              v-if="isAdmin"
+              class="btn btn-danger"
+              @click="confirmDelete(director.id)"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Edit Director Form -->

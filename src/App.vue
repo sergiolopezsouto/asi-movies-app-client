@@ -20,11 +20,6 @@
               Movies
             </router-link>
           </li>
-          <!-- <li class="nav-item">
-            <router-link class="nav-link" to="/upcoming" active-class="active">
-              Upcoming
-            </router-link>
-          </li> -->
           <li class="nav-item">
             <router-link
               class="nav-link"
@@ -34,15 +29,6 @@
               Categories
             </router-link>
           </li>
-          <!-- <li class="nav-item">
-            <router-link
-              class="nav-link"
-              to="/searchusers"
-              active-class="active"
-            >
-              Search Users
-            </router-link>
-          </li> -->
           <li class="nav-item" v-if="isLogged">
             <router-link class="nav-link" to="/directors" active-class="active">
               Directors

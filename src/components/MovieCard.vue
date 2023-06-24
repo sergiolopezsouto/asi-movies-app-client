@@ -18,7 +18,8 @@
         <strong>Duration: </strong>{{ movie.duration }} min
       </p>
       <p class="card-text">
-        <strong>Category: </strong>{{ movie.category.name }}
+        <strong>Category: </strong
+        >{{ movie.category ? movie.category.name : "Not available" }}
       </p>
       <p class="card-text">
         <strong>Release Date: </strong>{{ formatDate(movie.releaseDate) }}
@@ -38,6 +39,10 @@ export default {
   },
   methods: {
     formatDate(dateString) {
+      if (!dateString) {
+        return "Not available";
+      }
+
       const date = new Date(dateString);
       return date.toLocaleDateString("en-US");
     },

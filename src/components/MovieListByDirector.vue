@@ -20,7 +20,7 @@
           <movie-card :movie="movie" />
         </div>
         <h1 v-if="filteredMovies.length === 0">
-          No hay peliculas coincidentes
+          No hay peliculas de este director
         </h1>
       </div>
     </div>

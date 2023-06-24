@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h3 class="mb-3 mt-5">CATEGORIES</h3>
+    <h3 class="mb-5 mt-5">CATEGORIES</h3>
     <hr />
-    <div v-if="isAdmin" class="my-4">
+    <div v-if="isAdmin" class="my-4 mb-5">
       <input
         v-model="newCategory.name"
         type="text"
@@ -16,29 +16,35 @@
     </div>
 
     <div class="mb-3" v-for="category in categoryList" :key="category.id">
-      <router-link
-        :to="`/moviesbycategory/${category.name}`"
-        style="display: inline-block; margin-right: 10px"
-      >
-        {{ category.name }}
-      </router-link>
+      <div class="container">
+        <div class="row">
+          <div :class="{ 'col-md-4': isAdmin, 'col-md-12': !isAdmin }">
+            <router-link :to="`/moviesbycategory/${category.name}`">
+              {{ category.name }}
+            </router-link>
+          </div>
 
-      <button
-        v-if="isAdmin"
-        class="btn btn-dark"
-        style="margin-right: 5px"
-        @click="editCategory(category)"
-      >
-        Edit
-      </button>
-      <button
-        v-if="isAdmin"
-        class="btn btn-danger"
-        style="margin-right: 5px"
-        @click="confirmDelete(category.id)"
-      >
-        Delete
-      </button>
+          <div class="col-md-4">
+            <button
+              v-if="isAdmin"
+              class="btn btn-dark"
+              @click="editCategory(category)"
+            >
+              Edit
+            </button>
+          </div>
+
+          <div class="col-md-4">
+            <button
+              v-if="isAdmin"
+              class="btn btn-danger"
+              @click="confirmDelete(category.id)"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Edit Category Form -->

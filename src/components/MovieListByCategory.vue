@@ -20,6 +20,7 @@
       </div>
     </div>
   </div>
+  <h1 v-if="filteredMovies.length === 0">No hay películas de esta categoría</h1>
 </template>
 
 <script>
