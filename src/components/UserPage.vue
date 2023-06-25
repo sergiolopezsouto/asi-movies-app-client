@@ -115,7 +115,6 @@ export default {
           arrays.push(this.user.favoriteMovies.slice(i, i + chunkSize));
         }
       }
-
       return arrays;
     },
   },
