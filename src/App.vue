@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-      <router-link class="navbar-brand" to="/"> Events App </router-link>
+      <router-link class="navbar-brand" to="/"> Movies App </router-link>
       <button
         class="navbar-toggler"
         type="button"
@@ -32,6 +32,15 @@
           <li class="nav-item" v-if="isLogged">
             <router-link class="nav-link" to="/directors" active-class="active">
               Directors
+            </router-link>
+          </li>
+          <li class="nav-item" v-if="isLogged">
+            <router-link
+              class="nav-link"
+              to="/searchusers"
+              active-class="active"
+            >
+              Search Users
             </router-link>
           </li>
           <li class="nav-item" v-if="isLogged && isAdmin">

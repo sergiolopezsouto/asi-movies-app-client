@@ -15,7 +15,7 @@ import MovieDetail from "@/components/MovieDetail.vue";
 import MovieListByCategory from "@/components/MovieListByCategory.vue";
 import MovieListByDirector from "@/components/MovieListByDirector.vue";
 import MovieList from "@/components/MovieList.vue";
-// import SearchUsers from "@/components/SearchUsers.vue";
+import SearchUsers from "@/components/SearchUsers.vue";
 
 import auth from "@/common/auth";
 import { getStore } from "@/common/store";
@@ -103,15 +103,14 @@ const routes = [
     path: "/users/:id",
     name: "UserPage",
     component: UserPage,
-
-    meta: { requiresAuth: true, authority: "ADMIN" }, // Ruta protegida y requiere rol de "admin"
+    meta: { requiresAuth: true }, // Ruta protegida y requiere autenticación
   },
-  // {
-  //   path: "/searchusers",
-  //   name: "SearchUsers",
-  //   component: SearchUsers,
-  //   meta: { requiresAuth: true }, // Ruta protegida y requiere autenticación
-  // },
+  {
+    path: "/searchusers",
+    name: "SearchUsers",
+    component: SearchUsers,
+    meta: { requiresAuth: true }, // Ruta protegida y requiere autenticación
+  },
   {
     path: "/accessdenied",
     name: "ForbiddenPage",

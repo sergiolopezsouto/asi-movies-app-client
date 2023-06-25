@@ -2,18 +2,79 @@
   <div>
     <h3 class="mt-5">{{ user.login }}</h3>
     <hr />
+    <h3 class="mt-5">FAVORITE MOVIES</h3>
+    <div v-if="user.favoriteMovies?.length">
+      <div
+        id="movieCarousel"
+        class="carousel slide my-5"
+        data-bs-ride="carousel"
+        style="padding: 0 60px"
+      >
+        <div class="carousel-inner">
+          <div
+            class="carousel-item"
+            :class="{ active: index === 0 }"
+            v-for="(chunk, index) in chunkedMovies"
+            :key="'chunk-' + index"
+          >
+            <div class="row justify-content-start">
+              <div
+                :class="getColClass()"
+                v-for="movie in chunk"
+                :key="movie.id"
+              >
+                <div class="m-5">
+                  <MovieCard :movie="movie" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#movieCarousel"
+          data-bs-slide="prev"
+          style="left: -75px; color: gray"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#movieCarousel"
+          data-bs-slide="next"
+          style="right: -75px; color: gray"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+    <h1 class="mt-5" v-else>
+      El usuario no ha añadido ninguna película a favoritos todavía.
+    </h1>
   </div>
 </template>
 
 <script>
 import { getStore } from "@/common/store";
 import UserRepository from "@/repositories/UserRepository";
+import MovieCard from "@/components/MovieCard.vue";
 import { useRouter } from "vue-router";
 
 export default {
+  components: {
+    MovieCard,
+  },
   data() {
     return {
-      user: {},
+      user: {
+        login: "",
+        authority: "",
+        favoriteMovies: [],
+      },
     };
   },
   created() {
@@ -27,12 +88,43 @@ export default {
   methods: {
     async getUserData(user_id) {
       try {
-        this.user = await UserRepository.getUserById(user_id);
-        console.log(this.user);
+        const user = await UserRepository.getUserById(user_id);
+        this.user = user;
       } catch (error) {
         console.error(error);
       }
     },
+    getColClass() {
+      const width = window.innerWidth;
+      if (width < 576) return "col-12";
+      else if (width >= 576 && width < 768) return "col-sm-6";
+      else return "col-md-3";
+    },
+  },
+  computed: {
+    chunkedMovies() {
+      let chunkSize;
+      const width = window.innerWidth;
+      if (width < 576) chunkSize = 1;
+      else if (width >= 576 && width < 768) chunkSize = 2;
+      else chunkSize = 4;
+
+      const arrays = [];
+      if (this.user.favoriteMovies?.length) {
+        for (let i = 0; i < this.user.favoriteMovies.length; i += chunkSize) {
+          arrays.push(this.user.favoriteMovies.slice(i, i + chunkSize));
+        }
+      }
+
+      return arrays;
+    },
   },
 };
 </script>
+
+<style scoped>
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1);
+}
+</style>

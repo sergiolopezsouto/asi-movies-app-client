@@ -135,7 +135,7 @@ export default {
         </select>
       </div>
 
-      <button type="submit" class="btn btn-primary">Guardar</button>
+      <button type="submit" class="btn btn-primary">ADD MOVIE</button>
     </form>
   </div>
 </template>

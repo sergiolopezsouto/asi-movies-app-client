@@ -9,6 +9,7 @@
         id="movieCarousel"
         class="carousel slide my-5"
         data-bs-ride="carousel"
+        style="padding: 0 60px"
       >
         <div class="carousel-inner">
           <div
@@ -17,13 +18,15 @@
             v-for="(chunk, index) in chunkedMovies"
             :key="'chunk-' + index"
           >
-            <div class="d-flex justify-content-around">
+            <div class="row justify-content-start">
               <div
-                class="movie-card-container"
+                :class="getColClass()"
                 v-for="movie in chunk"
                 :key="movie.id"
               >
-                <MovieCard :movie="movie" />
+                <div class="m-5">
+                  <MovieCard :movie="movie" />
+                </div>
               </div>
             </div>
           </div>
@@ -33,6 +36,7 @@
           type="button"
           data-bs-target="#movieCarousel"
           data-bs-slide="prev"
+          style="left: -75px; color: gray"
         >
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
@@ -42,6 +46,7 @@
           type="button"
           data-bs-target="#movieCarousel"
           data-bs-slide="next"
+          style="right: -75px; color: gray"
         >
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
@@ -85,12 +90,22 @@ export default {
         console.error(error);
       }
     },
+    getColClass() {
+      const width = window.innerWidth;
+      if (width < 576) return "col-12";
+      else if (width >= 576 && width < 768) return "col-sm-6";
+      else return "col-md-3";
+    },
   },
   computed: {
     chunkedMovies() {
-      const chunkSize = 4;
-      const arrays = [];
+      let chunkSize;
+      const width = window.innerWidth;
+      if (width < 576) chunkSize = 1;
+      else if (width >= 576 && width < 768) chunkSize = 2;
+      else chunkSize = 4;
 
+      const arrays = [];
       if (this.user.favoriteMovies?.length) {
         for (let i = 0; i < this.user.favoriteMovies.length; i += chunkSize) {
           arrays.push(this.user.favoriteMovies.slice(i, i + chunkSize));
@@ -105,7 +120,11 @@ export default {
 
 <style scoped>
 .movie-card-container {
-  flex: 1 0 15%;
-  max-width: 15%;
+  margin-right: 10px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1);
 }
 </style>
