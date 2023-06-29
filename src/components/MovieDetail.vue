@@ -84,7 +84,7 @@
           <h3 class="mt-5">Edit Movie</h3>
           <input type="text" v-model="editedMovie.title" placeholder="Title" />
           <input
-            type="text"
+            type="textarea"
             v-model="editedMovie.synopsis"
             placeholder="Synopsis"
           />
@@ -110,15 +110,15 @@
           />
           <input
             type="text"
-            v-model="editedMovie.trailerUrl"
-            placeholder="Trailer URL"
+            v-model="editedMovie.imageUrl"
+            placeholder="Image URL"
           />
-          <input
+          <!-- <input
             type="text"
             v-model="editedMovie.category"
             placeholder="Category"
-          />
-          <!-- <select v-model="editedMovie.category" placeholder="Category">
+          /> -->
+          <select v-model="editedMovie.category" placeholder="Category">
             <option
               v-for="category in categories"
               :key="category.id"
@@ -126,7 +126,7 @@
             >
               {{ category.name }}
             </option>
-          </select> -->
+          </select>
           <button class="btn btn-primary" @click="saveEditedMovie">Save</button>
           <button class="btn btn-secondary" @click="cancelEdit">Cancel</button>
         </div>
