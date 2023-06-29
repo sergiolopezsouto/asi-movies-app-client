@@ -58,7 +58,7 @@ export default {
 </script>
 
 <template>
-  <h3 class="mt-5">ADD/EDIT NEW MOVIE</h3>
+  <h3 class="mt-5">ADD/EDIT MOVIE</h3>
   <div class="container mb-5">
     <form class="formulario" @submit.prevent="createMovie">
       <div class="mb-3">
