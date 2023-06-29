@@ -22,6 +22,18 @@ async function saveMovie(movie) {
   }
 }
 
+async function saveMovie2(movie) {
+  if (movie.id) {
+    // Si el movieo ya tiene un id, lo actualizamos
+    const response = await HTTP.put(`movies/2/${movie.id}`, movie);
+    return response.data;
+  } else {
+    // Si el movieo no tiene un id, lo creamos
+    const response = await HTTP.post(`movies/2`, movie);
+    return response.data;
+  }
+}
+
 async function deleteMovie(id) {
   const response = await HTTP.delete(`movies/${id}`);
   return response.data;
@@ -30,6 +42,7 @@ async function deleteMovie(id) {
 export default {
   getMovies,
   saveMovie,
+  saveMovie2,
   getMovieById,
   deleteMovie,
 };

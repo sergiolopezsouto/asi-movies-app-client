@@ -56,6 +56,9 @@
           <span v-else> No director specified </span>
         </p>
       </div>
+      <p>
+        <router-link :to="`/editmovie2/${movie.id}`"> EDIT MOVIE </router-link>
+      </p>
       <div>
         <hr />
         <button v-if="!isFavorite" class="btn btn-primary" @click="addFavorite">
@@ -105,7 +108,17 @@
             v-model="editedMovie.trailerUrl"
             placeholder="Trailer URL"
           />
-          <select v-model="editedMovie.category" placeholder="Category">
+          <input
+            type="text"
+            v-model="editedMovie.trailerUrl"
+            placeholder="Trailer URL"
+          />
+          <input
+            type="text"
+            v-model="editedMovie.category"
+            placeholder="Category"
+          />
+          <!-- <select v-model="editedMovie.category" placeholder="Category">
             <option
               v-for="category in categories"
               :key="category.id"
@@ -113,7 +126,7 @@
             >
               {{ category.name }}
             </option>
-          </select>
+          </select> -->
           <button class="btn btn-primary" @click="saveEditedMovie">Save</button>
           <button class="btn btn-secondary" @click="cancelEdit">Cancel</button>
         </div>

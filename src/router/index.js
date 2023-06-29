@@ -7,6 +7,7 @@ import RegisterForm from "@/components/RegisterForm.vue";
 import CategoryList from "@/components/CategoryList.vue";
 import DirectorList from "@/components/DirectorList.vue";
 import MovieForm from "@/components/CreateMovieForm.vue";
+import MovieForm2 from "@/components/CreateMovieForm2.vue";
 import EventProfile from "@/components/ProfilePage.vue";
 import DirectorDetail from "@/components/DirectorDetail.vue";
 import UserList from "@/components/UserList.vue";
@@ -85,6 +86,18 @@ const routes = [
     path: "/createmovie",
     name: "CreateMovie",
     component: MovieForm,
+    meta: { requiresAuth: true, authority: "ADMIN" }, // Ruta protegida y requiere rol de "admin"
+  },
+  {
+    path: "/createmovie2",
+    name: "CreateMovie2",
+    component: MovieForm2,
+    meta: { requiresAuth: true, authority: "ADMIN" }, // Ruta protegida y requiere rol de "admin"
+  },
+  {
+    path: "/editmovie2/:movie_id",
+    name: "editMovie2",
+    component: MovieForm2,
     meta: { requiresAuth: true, authority: "ADMIN" }, // Ruta protegida y requiere rol de "admin"
   },
   {

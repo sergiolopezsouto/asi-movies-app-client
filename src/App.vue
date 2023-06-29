@@ -53,6 +53,15 @@
             </router-link>
           </li>
           <li class="nav-item" v-if="isLogged && isAdmin">
+            <router-link
+              class="nav-link"
+              to="/createmovie2"
+              active-class="active"
+            >
+              Create movie (updated)
+            </router-link>
+          </li>
+          <li class="nav-item" v-if="isLogged && isAdmin">
             <router-link class="nav-link" to="/users" active-class="active">
               Users
             </router-link>
