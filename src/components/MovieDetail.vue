@@ -110,7 +110,7 @@
           />
           <input
             type="text"
-            v-model="editedMovie.imageUrl"
+            v-model="editedMovie.imagePath"
             placeholder="Image URL"
           />
           <!-- <input
